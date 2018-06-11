@@ -22,7 +22,6 @@ class aplicacion():
         self.cmbox_opcion.current(0)
         self.btn_opcion=Button(self.ventana_principal,text="LISTO",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),highlightbackground ="goldenrod",highlightcolor ="goldenrod",command=self.opciones)
         self.btn_opcion.config(width=17)
-    def componentes_dos_palabras(self):
         """Componentes de dos palabras"""
         self.lbl_relaciones=Label( self.ventana_principal, text="Palabras: ", font=("Helvetica", 12),fg="goldenrod",bg="black")
         self.lbl_relaciones.config( width=37)
@@ -68,7 +67,7 @@ class aplicacion():
         self.btn_rel_prima=Button(self.ventana_principal,text="Relación",command=self.func_relacion_prima)
         self.btn_rel_prima_grado=Button(self.ventana_principal,text="Relación prima y grado",command=self.func_relacion_prima_grado)
         self.btn_rel_prima_grado.config( width=37)
-    def componentes_idioma_palabra(self):
+        """componentes idioma palabra"""
         self.cmbox_idioma_pal_value = StringVar()
         self.cmbox_idioma_pal= ttk.Combobox(self.ventana_principal, textvariable=self.cmbox_idioma_pal_value)
         self.cmbox_idioma_pal['values'] =("Relacionadas","Conjunto de palabras","Idiomas relacionados")
@@ -76,6 +75,14 @@ class aplicacion():
         self.btn_idioma_pal=Button(self.ventana_principal,text="Procesar",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_palabra_idioma)
         self.lbl_res_relacionado=Label( self.ventana_principal, font=("Helvetica", 12),fg="goldenrod",bg="black")
         self.listbox_palabras = Listbox(self.ventana_principal,width=40, height=15)
+        """componentes Idiomas"""
+        self.cmbox_idioma_value = StringVar()
+        self.cmbox_idioma= ttk.Combobox(self.ventana_principal, textvariable=self.cmbox_idioma_value)
+        self.cmbox_idioma['values'] =("Contar palabras en común","Listar palabras comunes","Idioma que más aportó","Listar idiomas")
+        self.cmbox_idioma.current(0)
+        self.btn_idioma=Button(self.ventana_principal,text="Procesar",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_palabra_idioma)
+        self.lbl_res_cantPal=Label( self.ventana_principal, font=("Helvetica", 12),fg="goldenrod",bg="black")
+        self.btn_idioma=Button(self.ventana_principal,text="Procesar",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_idiomas)
         
     def v_principal(self):        
         self.lbl_bienvenido.pack()
@@ -130,7 +137,7 @@ class aplicacion():
         self.lbl_bienvenido["text"]="Palabra-Idioma"
         self.lbl_palabras.place(x=280,y=70)
         self.lbl_palabras["text"]="Ingrese palabra, idioma y elija una opción: "
-        self.lbl_palabras.config( width=35)
+        self.lbl_palabras.config(width=35)
         self.palabra1.place(x=200,y=100)
         self.palabra2.place(x=380,y=100)
         self.cmbox_idioma_pal.place(x=560,y=100)
@@ -139,9 +146,17 @@ class aplicacion():
     def idioma_interfaz(self):
         self.desaparecer_elementos()
         self.lbl_bienvenido["text"]="Idiomas"
+        self.lbl_palabras.place(x=280,y=70)
+        self.lbl_palabras["text"]="Ingrese idiomas y elija una opción: "
+        self.lbl_palabras.config(width=35)
+        self.palabra1.place(x=200,y=100)
+        self.palabra2.place(x=380,y=100)
+        self.cmbox_idioma.place(x=560,y=100)
+        self.btn_idioma.place(x=260,y=150)
+        self.btn_idioma.config( width=40)
     def desaparecer_elementos(self):
-        self.componentes_dos_palabras()
-        self.componentes_idioma_palabra()
+        
+        self.listbox_palabras.place(x=275,y=2000)
         self.cmbox_idioma_pal.place(x=560,y=1000)
         self.btn_idioma_pal.place(x=260,y=1500)
         self.btn_idioma_pal.config( width=4000)
@@ -208,6 +223,7 @@ class aplicacion():
     def func_palabra_idioma(self):
         self.lbl_res_relacionado.place(x=350,y=2500)
         self.listbox_palabras.place(x=275,y=2000)
+        self.listbox_palabras.delete(0, END)
         if (self.cmbox_idioma_pal.get()=="Relacionadas"):
             self.palabra=self.palabra1.get()
             self.idioma=self.palabra2.get()
@@ -219,6 +235,31 @@ class aplicacion():
             self.idioma=self.palabra2.get()
             self.listbox_palabras.place(x=275,y=200)
         else:
+            self.palabra2.delete(0, END)
+            self.palabra=self.palabra1.get()
+            self.listbox_palabras.place(x=275,y=200)
+    def func_idiomas(self):
+        self.lbl_res_cantPal.place(x=350,y=2500)
+        self.listbox_palabras.place(x=275,y=2000)
+        self.listbox_palabras.delete(0, END)
+        if (self.cmbox_idioma.get()=="Contar palabras en común"):
+            self.idioma1=self.palabra1.get()
+            self.idioma2=self.palabra2.get()
+            self.lbl_res_cantPal.place(x=400,y=250)
+            self.lbl_res_cantPal.config(font=("Helvetica", 30))
+            self.lbl_res_cantPal["text"]=" " #Cantidad
+        elif (self.cmbox_idioma_pal.get()=="Listar palabras comunes"):
+            self.idioma1=self.palabra1.get()
+            self.idioma2=self.palabra2.get()
+            self.listbox_palabras.place(x=275,y=200)
+        elif (self.cmbox_idioma.get()=="Idioma que más aportó"):
+            self.palabra1.delete(0, END)
+            self.palabra2.delete(0, END)
+            self.lbl_res_cantPal.place(x=400,y=250)
+            self.lbl_res_cantPal.config(font=("Helvetica", 30))
+            self.lbl_res_cantPal["text"]=" " #Idioma y porcentaje
+        else:
+            self.palabra1.delete(0, END)
             self.palabra2.delete(0, END)
             self.palabra=self.palabra1.get()
             self.listbox_palabras.place(x=275,y=200)
