@@ -47,6 +47,17 @@ class aplicacion():
         self.var6 = IntVar()
         self.chbox_etymologically = Checkbutton(self.ventana_principal, text=" etymologically", variable=self.var6, font=("Helvetica", 12),fg="goldenrod",bg="black",anchor=SW)
         self.chbox_etymologically.config( width=25)
+        barramenu = Menu(self.ventana_principal)
+        self.ventana_principal['menu'] = barramenu
+        self.menu1 = Menu(barramenu)
+        barramenu.add_cascade(menu=self.menu1, label='Inicio')
+        self.menu1.add_command(label='Página principal', 
+                          command=self.v_principal, 
+                          underline=0, accelerator="Ctrl+c",compound=LEFT)
+        self.palabra1 = Entry(self.ventana_principal)
+        self.palabra1.config(width=17)
+        self.palabra2=Entry(self.ventana_principal)
+        self.palabra2.config(width=17)
         """Componentes de dos palabras"""
         self.lbl_relaciones=Label( self.ventana_principal, text="Palabras: ", font=("Helvetica", 12),fg="goldenrod",bg="black")
         self.lbl_relaciones.config( width=37)
@@ -87,11 +98,11 @@ class aplicacion():
         self.lbl_pal1_tia.config( width=17)
         self.lbl_pal1_primas=Label( self.ventana_principal,fg="goldenrod",bg="black")
         self.lbl_pal1_primas.config( width=17)
-        self.btn_rel_her=Button(self.ventana_principal,text="Relación",command=self.func_relacion_hermana)
-        self.btn_rel_hija=Button(self.ventana_principal,text="Relación",command=self.func_relacion_hija)
-        self.btn_rel_tia=Button(self.ventana_principal,text="Relación",command=self.func_relacion_tia)
-        self.btn_rel_prima=Button(self.ventana_principal,text="Relación",command=self.func_relacion_prima)
-        self.btn_rel_prima_grado=Button(self.ventana_principal,text="Relación prima y grado",command=self.func_relacion_prima_grado)
+        self.btn_rel_her=Button(self.ventana_principal,text="Relación",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_relacion_hermana)
+        self.btn_rel_hija=Button(self.ventana_principal,text="Relación",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_relacion_hija)
+        self.btn_rel_tia=Button(self.ventana_principal,text="Relación",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_relacion_tia)
+        self.btn_rel_prima=Button(self.ventana_principal,text="Relación",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_relacion_prima)
+        self.btn_rel_prima_grado=Button(self.ventana_principal,text="Relación prima y grado",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_relacion_prima_grado)
         self.btn_rel_prima_grado.config( width=37)
         """componentes idioma palabra"""
         self.cmbox_idioma_pal_value = StringVar()
@@ -110,15 +121,12 @@ class aplicacion():
         self.lbl_res_cantPal=Label( self.ventana_principal, font=("Helvetica", 12),fg="goldenrod",bg="black")
         self.btn_idioma=Button(self.ventana_principal,text="Procesar",fg="black",bg="goldenrod",font=("Bitstream Vera Serif", 10),command=self.func_idiomas)
         
-    def v_principal(self):        
+    def v_principal(self):
+        self.desaparecer_elementos()
         self.lbl_bienvenido.pack()
         self.cmbox_opcion.place(x=200,y=100)        
         self.btn_opcion.place(x=550,y=245)
         self.btn_opcion.config( width=30)
-        self.palabra1 = Entry(self.ventana_principal)
-        self.palabra1.config(width=17)
-        self.palabra2=Entry(self.ventana_principal)
-        self.palabra2.config(width=17)
         self.lbl_opcion.place(x=20,y=100)
         self.lbl_relacion.place(x=20,y=150)
         self.chbox_etymological_origin_of.place(x=200,y=150)
@@ -190,9 +198,13 @@ class aplicacion():
         self.btn_idioma.place(x=260,y=150)
         self.btn_idioma.config( width=40)
     def desaparecer_elementos(self):
-        self.chbox_etymology.place(x=200,y=2400)
+        self.chbox_etymological_origin_of.place(x=200,y=1500)
+        self.chbox_has_derived_form .place(x=200,y=1800)
         self.chbox_is_derived_from.place(x=200,y=2100)
-        self.chbox_has_derived_form .place(x=200,y=200)
+        self.chbox_etymology.place(x=200,y=2400)
+        self.chbox_etymologically_related.place(x=200,y=2700)
+        self.chbox_derived.place(x=200,y=3000)
+        self.chbox_etymologically.place(x=200,y=3300)
         self.lbl_relacion.place(x=20,y=1500)
         self.lbl_opcion.place(x=5000,y=5000)
         self.chbox_etymological_origin_of.place(x=1000,y=1000)
@@ -238,24 +250,28 @@ class aplicacion():
         self.palabra1.delete(0, END)
         self.palabra2.delete(0, END)
         self.lbl_res_hermanas["text"]=" " #En esta se pone el resultado de la búsqueda V/F
+        self.ventana_detalles()
     def func_relacion_hija(self):
         self.lbl_pal1_hija["text"]=self.palabra1.get()
         self.lbl_pal2_hija["text"]=self.palabra2.get()
         self.palabra1.delete(0, END)
         self.palabra2.delete(0, END)
         self.lbl_res_hija["text"]=" " #En esta se pone el resultado de la búsqueda V/F
+        self.ventana_detalles()
     def func_relacion_tia(self):
         self.lbl_pal1_tia["text"]=self.palabra1.get()
         self.lbl_pal2_tia["text"]=self.palabra2.get()
         self.palabra1.delete(0, END)
         self.palabra2.delete(0, END)
         self.lbl_res_tia["text"]=" " #En esta se pone el resultado de la búsqueda V/F
+        self.ventana_detalles()
     def func_relacion_prima(self):
         self.lbl_pal1_primas["text"]=self.palabra1.get()
         self.lbl_pal2_primas["text"]=self.palabra2.get()
         self.palabra1.delete(0, END)
         self.palabra2.delete(0, END)
         self.lbl_res_primas["text"]=" " #En esta se pone el resultado de la búsqueda V/F
+        self.ventana_detalles()
     def func_relacion_prima_grado(self):
         self.lbl_pal1_primas["text"]=self.palabra1.get()
         self.lbl_pal2_primas["text"]=self.palabra2.get()
@@ -263,10 +279,12 @@ class aplicacion():
         self.palabra2.delete(0, END)
         self.lbl_res_primas["text"]=" " #En esta se pone el resultado de la búsqueda V/F
         self.lbl_res_grado["text"]=" " #Si el resultado de prima es falso, se mantieneen blanco, sino pone grado
+        self.ventana_detalles()
     def func_palabra_idioma(self):
         self.lbl_res_relacionado.place(x=350,y=2500)
         self.listbox_palabras.place(x=275,y=2000)
         self.listbox_palabras.delete(0, END)
+        self.ventana_detalles()
         if (self.cmbox_idioma_pal.get()=="Relacionadas"):
             self.palabra=self.palabra1.get()
             self.idioma=self.palabra2.get()
@@ -285,6 +303,7 @@ class aplicacion():
         self.lbl_res_cantPal.place(x=350,y=2500)
         self.listbox_palabras.place(x=275,y=2000)
         self.listbox_palabras.delete(0, END)
+        self.ventana_detalles()
         if (self.cmbox_idioma.get()=="Contar palabras en común"):
             self.idioma1=self.palabra1.get()
             self.idioma2=self.palabra2.get()
@@ -306,8 +325,15 @@ class aplicacion():
             self.palabra2.delete(0, END)
             self.palabra=self.palabra1.get()
             self.listbox_palabras.place(x=275,y=200)
-            
-            
+    def ventana_detalles(self):
+        self.detalles = Toplevel()
+        self.detalles.geometry("400x300")
+        self.detalles.resizable(width=False, height=False)
+        self.detalles.title("Detalles")
+        self.detalles["bg"]="black"
+        self.listbox_detalles = Listbox(self.detalles,width=40, height=15)
+        self.listbox_detalles.place(x=50,y=30)
+        
 
 def main():
     mi_app = aplicacion()
