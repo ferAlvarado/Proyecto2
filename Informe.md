@@ -6,7 +6,7 @@
 ## Proyecto 2: Relaciones etimológicas.
 ## Profesor: Juan Esquivel.
 ## Estudiantes: 
-               Fernanda Alvarado.
-               Freyser Jímenez.
-               Minor Sancho.
+                 ### Fernanda Alvarado.
+                 ### Freyser Jímenez.
+                 ### Minor Sancho.
             
