@@ -14,7 +14,7 @@
 
 # Sección 2. Descripción de instalación.
 # Sección 3. Manual de usuario.
-
+(Manual de usuario)[https://github.com/ferAlvarado/Proyecto2/blob/master/Manual%20de%20instalaci%C3%B3n.md]
 # Sección 4. Resultados.
 # Sección 5. Detalles de implementación.
 # Distribución de trabajo.
