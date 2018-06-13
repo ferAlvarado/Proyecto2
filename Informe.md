@@ -25,3 +25,12 @@ Manual de usuario:https://github.com/ferAlvarado/Proyecto2/blob/master/Manual%20
 # Sección 4. Resultados.
 # Sección 5. Detalles de implementación.
 # Distribución de trabajo.
+                              -------------------------------------------------------
+                              -           Nombre          -     % Aporte            -
+                              -------------------------------------------------------
+                              -     Fernanda Alvarado     -                         -
+                              -------------------------------------------------------
+                              -      Freyser Jímenez      -                         -
+                              -------------------------------------------------------
+                              -       Minor Sancho        -                         -
+                              -------------------------------------------------------
