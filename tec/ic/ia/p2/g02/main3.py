@@ -20,19 +20,12 @@ import csv
 from time import time
 #import pandas as pd
 import numpy as np
-
-
-pyDatalog.create_atoms(
-    'idioma_aportando,contar_palabras,padre,hermano,\
-     tio,primo,hijo,palabra_idioma,idioma_palabra,\
-     contar_palabras_comunes,listar_palabras_comunes,\
-     ancestro,descendiente,idioma,palabra_comun,P,X,\
-     Y,A,B'
-    )
-
-
-lenguajes= [
-    'ara', 'ave', 'akk', 'aaq', 'abe', 'abs','adt', 'afr', 'aii',
+pyDatalog.create_atoms('idioma_aportando,contar_palabras,padre,\
+                        hermano,tio,primo,hijo,palabra_idioma,idioma_palabra,\
+                        contar_palabras_comunes,listar_palabras_comunes,\
+                        ancestro,descendiente,idioma,palabra_comun,P,X,Y,A,B'
+                       )
+lenguajes= ['ara', 'ave', 'akk', 'aaq', 'abe', 'abs','adt', 'afr', 'aii',
     'ain', 'akz', 'ale','alq', 'amh', 'amj', 'ang', 'apw', 'arg',
     'arn', 'arq', 'arw', 'ary', 'arz', 'ase','ast', 'auc', 'ava',
     'axm', 'ayl', 'aym','aze', 'bak', 'bar', 'bdy', 'bel', 'ben',
@@ -77,16 +70,12 @@ lenguajes= [
     'xnt', 'xon', 'xpr', 'xtg', 'xto', 'yid', 'yol', 'yor', 'yua',
     'yue', 'yur', 'yxg', 'zai', 'zko', 'zku', 'zsm', 'zul'
     ]
-
-
-lenguajes1=[
-    'idioma_x','idioma_y','idioma_z'
-    ]
-
-
+lenguajes1=['idioma_x','idioma_y','idioma_z']
+################################### 1 ##################################
 """
 Funcion que nos permite obtener los datos de cada linea del archivo.
 """
+# -----------------------------------------------------------------------
 def buscar_dos_puntos_mayor_rendimiento(
         lista):
     acum = []
@@ -99,77 +88,41 @@ def buscar_dos_puntos_mayor_rendimiento(
         else:
             acum +=[palabra]
     return acum
-
-
 """
 Definicion de clausulas de logica.
 """
-#=================HERMANO=================
 hermano(X,Y) <= padre(X,P) & padre(Y,P)  & (X!=Y)
-
-
-#=================HIJO=================
 #hijo es X y padre es Y
 hijo(X,Y) <= padre(X,Y)
-
-
-#=================TIO=================
 #primero X = sobrino y segundo Y = tio
 tio(X,Y) <= padre(X,P) & hermano(Y,P)
-
-
-#=================PRIMO=================
 # X = primo 1 y Y = primo 2
 primo(X,Y) <= padre(X,A) & tio(Y,A)
-
-
-#=================Descendiente=================
 #A MAYOR Y B MENOR
 descendiente(B,A) <= padre(B,A)
 descendiente(B,A) <= padre(B,P) & descendiente(P,A)
-
-
-#=================Ancestro=================
 #A MAYOR Y Y MENOR
 ancestro(A,Y) <= descendiente(Y,A)
-
-
-#=================PalabraIdioma=================
 #X igual palabra y Y igual idioma
 palabra_idioma(X,Y) <= idioma(X,Y)
 palabra_idioma(X,Y) <= descendiente(X,P) & idioma(P,Y)
 palabra_idioma(X,Y) <= ancestro(X,P) & idioma(P,Y)
-
-
-#=================PalabraComun=================
 #X palabra y Y idioma
 palabra_comun(X,Y,A) <= idioma(A,Y) & padre(A,X)
-
-
-#=================idiomaPalabra=================
 #X palabra y Y resultado
 idioma_palabra(X,Y) <= idioma(X,Y)
 idioma_palabra(X,Y) <= descendiente(X,P) & idioma(P,Y)
 idioma_palabra(X,Y) <= ancestro(X,P) & idioma(P,Y)
-
-
-#=================ContaryListarPalabrasComunes=================
 #X palabra y Y resultado
-#listar
 listar_palabras_comunes(X,Y,P) <= idioma(P,X) & idioma(P,Y)
-
-
 #Contar
 contar_palabras_comunes(X,Y) <= idioma(P,X) & idioma(P,Y)
 (contar_palabras[X,Y] == len_(P)) <= listar_palabras_comunes(X,Y,P)
-
-
 #=================idiomasAportandoaOtro=================
 #X palabra y Y resultado
 idioma_aportando(A,X,P)<= idioma(P,A) & padre(P,Y) & idioma(Y,X)
 
 
-#Mayor procentaje
 def obtener_Mayor_Porcentaje(
         idioma,lenguajes):
     acum = []
@@ -188,7 +141,6 @@ def obtener_Mayor_Porcentaje(
     return str(maximo[0])+" "+str(((maximo[1]/total)*100))
 
 
-#Todos los procentajes
 def obtener_Lista_Porcentajes(
         idioma,lenguajes):
     acum = []
@@ -196,8 +148,7 @@ def obtener_Lista_Porcentajes(
     maximo = ["",0]
     for i in lenguajes:
         if idioma != i:
-            num=len(idioma_aportando(
-                    idioma,i,P))
+            num=len(idioma_aportando(idioma,i,P))
             if num != 0:
                 acum+=[[i,num]]
     for j in acum:
@@ -207,7 +158,6 @@ def obtener_Lista_Porcentajes(
     return acum
 
 
-################################### 3 ##################################
 """
 Funcion para cargar los datos del archivo.
 """
@@ -227,48 +177,49 @@ def leer(
         for line in f:
             if line[1] == "rel:etymology" :
                 etymology_list += [
-                                  buscar_dos_puntos_mayor_rendimiento(line)
-                                  ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:etymological_origin_of" :
                 etymological_origin_list += [
-                                            buscar_dos_puntos_mayor_rendimiento(line)
-                                            ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:has_derived_form" :
                 has_derived_form_list += [
-                                         buscar_dos_puntos_mayor_rendimiento(line)
-                                         ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:is_derived_from" :
                 is_derived_from_list += [
-                                        buscar_dos_puntos_mayor_rendimiento(line)
-                                        ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:etymologically_related" :
                 etymologically_related_list += [
-                                                buscar_dos_puntos_mayor_rendimiento(line)
-                                                ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:derived" :
                 derived_list += [
-                                buscar_dos_puntos_mayor_rendimiento(line)
-                                ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:variant:orthography" :
                 variant_orthography_list += [
-                                            buscar_dos_puntos_mayor_rendimiento(line)
-                                            ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             elif line[1] =="rel:etymologically" :
                 etymologically_list += [
-                                        buscar_dos_puntos_mayor_rendimiento(line)
-                                        ]
+                    buscar_dos_puntos_mayor_rendimiento(line)
+                    ]
             else:
                 print("Opcion no encontrada")
                 continue
+    print("TEMINE")
     lista += [
-             etymology_list, variant_orthography_list, derived_list,
-             etymologically_related_list, is_derived_from_list,
-             has_derived_form_list, etymological_origin_list,etymologically_list
-             ]
+        etymology_list, variant_orthography_list, derived_list,
+        etymologically_related_list, is_derived_from_list,
+        has_derived_form_list, etymological_origin_list,
+        etymologically_list
+        ]
     return lista
 
 
-################################### 4 ##################################
 """
 Funcion para cargar los padres dependiendo la relacion en el archivo.
 """
@@ -304,7 +255,6 @@ def cargarPadres(
     return
 
 
-################################### 5 ##################################
 """
 Funcion para emparejar los idiomas dependiendo la relacion en el archivo.
 """
@@ -359,112 +309,93 @@ def cargar_Idiomas1(
                     + idioma(i[1],i[0])
                 else:
                     + idioma(i[5],i[4])
+    print("Idiomas Cargados...")
     return
-
-
-################################### 6 ##################################
 """
 Funcion para conocer datos finales, de opcion conocida.
 """
-# -----------------------------------------------------------------------
 def conocer_resultados(
         palabra1,palabra2,opcion):
     if opcion==1:
-        #Hermano
         result = hermano(
-                        palabra1,palabra2
-                        )
+            palabra1,palabra2
+            )
         if len(result) > 0:
             return "SI"
         else:
             return "NO"
     elif opcion==2:
-        #Primo
         result = primo(
-                      palabra1,palabra2
-                      )
+            palabra1,palabra2
+            )
         if len(result) > 0:
             return "SI"
         else:
             return "NO"
     elif opcion==3:
-        #Hijo
-        
         result = hijo(
-                      palabra1,palabra2
-                      )
+            palabra1,palabra2
+            )
         if len(result) > 0:
-           
             return "SI "
         else:
             return "NO"
     elif opcion==4:
-        #Tio
         result = tio(
-                    palabra1,palabra2
-                    )
+            palabra1,palabra2
+            )
         if len(result) > 0:
             return "SI"
         else:
             return "NO"
     elif opcion==5:
-        #palabraComun
         print("Entre en 5")
         result = palabra_comun(
-                               palabra1,palabra2,A
-                               )
+            palabra1,palabra2,A
+            )
         if len(result) > 0:
             string = 'palabra_comun('+palabra1+','+palabra2+',A)'
             x = pyDatalog.ask(string)
             return x
         else:
-            return "No existen palabras en \
-                    "+ palabra2 +" que desciendan de \
-                    "+palabra1
+            return "No existen palabras en "+ palabra2 +" \
+                    que desciendan de "+palabra1
     elif opcion==6:
-        #palabraIdioma
         result = palabra_idioma(
-                                palabra1,palabra2
-                                )
+            palabra1,palabra2
+            )
         if len(result) > 0:
             return "SI"
         else:
             return "NO"
     elif opcion==7:
-        #listar idiomas relacionados a una Palabra
         string = 'idioma_palabra('+palabra1+',A)'
         idiomas = pyDatalog.ask(string)
         print(idiomas)
         return idiomas
     elif opcion==8:
-        #cantidad de palabras Comunenes entre Idiomas
         string = 'contar_palabras['+palabra1+','+palabra2+']==P'
         idiomas = pyDatalog.ask(string)
         print(idiomas)
         return idiomas
-        
         return "Palabras relacionadas son: \n\
                 "+contar_palabras[palabra1,palabra2]==P
-    elif opcion==9:
-        #listar palabras Comunenes entre Idiomas
-        string = 'listar_palabras_comunes(\
-                '+palabra1+','+palabra2+',P)'
+    elif opcion==9:#listar palabras Comunenes entre Idiomas
+        string = 'listar_palabras_comunes('+palabra1+','+palabra2+',P)'
         idiomas = pyDatalog.ask(string)
         return idiomas
-    elif opcion==10:
-        #Idioma que mas aporta a otro
+    elif opcion==10:#Idioma que mas aporta a otro
         result = obtener_Mayor_Porcentaje(palabra1,lenguajes)
-        print("I   |   V \n" + "---------\n\
-                ",obtener_Mayor_Porcentaje(palabra1,lenguajes))
+        print("I   |   V \n" + "---------\n",
+              obtener_Mayor_Porcentaje(
+                  palabra1,lenguajes)
+              )
         return result 
-    elif opcion==11:
-        #Idioma que mas aporta a otro
-        acum = obtener_Lista_Porcentajes(palabra1,lenguajes)
+    elif opcion==11:#Idioma que mas aporta a otro
+        acum = obtener_Lista_Porcentajes(
+            palabra1,lenguajes
+            )
         for k in acum[:-1]:
             print(str(k[0])+" "+str(((k[1]/acum[-1])*100)))
     else:
         print("No se encontro la opcion")
-
-
-
-
