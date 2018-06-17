@@ -17,16 +17,16 @@ El software desarrollado se puede ejecutar en cualquier sistema operativo (Windo
 
 4. Seleccionar operación:
 4.1 Dos palabras: 
-[!Imagen3](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Dos_palabras.png?raw=true)
+[![Imagen3](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Dos_palabras.png?raw=true)
 
 4.2 Palabra idioma:
-[!Imagen3](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/palabra_idioma.png?raw=true)
+[![Imagen4](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/palabra_idioma.png?raw=true)
 
 4.3 Idioma: 
-[!Imagen4](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Idiomas.png?raw=true)
+[![Imagen5](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Idiomas.png?raw=true)
 
 5. Regresar a página de inicio.
-[!Imagen5](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Regresar.png?raw=true)
+[![Imagen6](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Regresar.png?raw=true)
 
 
 # Pruebas unitarias.
