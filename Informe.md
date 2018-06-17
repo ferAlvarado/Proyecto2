@@ -60,11 +60,28 @@ def leer(nombre):
             else:
                 print("Opcion no encontrada")
                 continue
-    lista += [etymology_list, variant_orthography_list, derived_list, etymologically_related_list, is_derived_from_list, has_derived_form_list, etymological_origin_list,etymologically_list]
+    lista += [etymology_list, variant_orthography_list, derived_list, etymologically_related_list,
+              is_derived_from_list, has_derived_form_list, etymological_origin_list,etymologically_list]
     return lista
 ```
-
+La lista que almacena los datos leídos es la siguiente:
+```sh
+lista += [etymology_list, variant_orthography_list, derived_list, etymologically_related_list,
+          is_derived_from_list, has_derived_form_list, etymological_origin_list,etymologically_list]
+```
 ## Estructuras de control.
+Para construir las estructura utilizadas en el proecto se utilizó la biblioteca pyDatalog; y se hace de la siguiente manera:
+```sh
+from pyDatalog import pyDatalog
+import csv
+from time import time
+
+pyDatalog.create_atoms('idioma_aportando,contar_palabras,
+                       padre,hermano,tio,primo,hijo,palabra_idioma,idioma_palabra,
+                       contar_palabras_comunes,listar_palabras_comunes,ancestro,
+                       descendiente,idioma,palabra_comun,P,X,Y,A,B')
+```                      
+
 # Distribución de trabajo.
                               -------------------------------------------------------
                               -           Nombre          -     % Aporte            -
