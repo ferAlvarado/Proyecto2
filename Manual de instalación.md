@@ -13,7 +13,7 @@ El software desarrollado se puede ejecutar en cualquier sistema operativo (Windo
 [![Imagen1](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/pag_inicio.png?raw=true)
 
 3. Seleccionar una opción para realizar las distintas operaciones; además elegir las diferentes relaciones con las que se desea ejecutar el programa.
-[!Imagen2](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Paso1.png?raw=true)
+[![Imagen2](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Paso1.png?raw=true)
 
 4. Seleccionar operación:
 4.1 Dos palabras: 
