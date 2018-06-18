@@ -30,3 +30,8 @@ El software desarrollado se puede ejecutar en cualquier sistema operativo (Windo
 
 
 # Pruebas unitarias.
+Para ejecutar las pruebas unitarias se utiliza la siguiente instrucción:
+```sh
+pytest -q moduloUnittest.py
+```
+[![Imagen7](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/unitTest.jpeg?raw=true)
