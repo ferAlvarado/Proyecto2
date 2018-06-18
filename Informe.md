@@ -23,6 +23,12 @@ Para instalar este proyecto:
 # Sección 3. Manual de usuario.
 Manual de usuario:https://github.com/ferAlvarado/Proyecto2/blob/master/Manual%20de%20instalaci%C3%B3n.md
 # Sección 4. Resultados.
+Según los datos de registrados en la base y las pruebas realizadas para los diferentes idiomas con etymological origin of se puede deducir el resultado más relevante es el aporte que tiene el español y el latín; tomando en cuenta que el 60% con una relación etimological origin of tiene un aporte del mismo idioma. Además, se observá que el latín y el español tienen una relación muy fuerte ya que el porcentaje de aporte es muy similar.
+A continuación, se muestran gráficas de los aportes del latín y el español a otros idiomas:
+[![Imagen1](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Latin.png?raw=true)
+
+[![Imagen2](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/spa.png?raw=true)
+
 # Sección 5. Detalles de implementación.
 ## Manejo de datos.
 Los datos que utiliza el código desarrollado son los de la base de datos "Etymological Wordnet", este es un archivo .tsv; para trabajar primero se lee el archivo; una vez realizada esta tarea, se almacenan en una lista que los separa según la relación; esto permite que la búsqueda sea ms eficiente ya que cada relación es la "llave primaria" de cada sublista. 
@@ -194,9 +200,11 @@ def cargar_Idiomas1(opciones, datos, valor):
      -------------------------------------------------------
      -           Nombre          -     % Aporte            -
      -------------------------------------------------------
-     -     Fernanda Alvarado     -                         -
+     -     Fernanda Alvarado     -        100              -
      -------------------------------------------------------
-     -      Freyser Jímenez      -                         -
+     -      Freyser Jímenez      -        100              -
      -------------------------------------------------------
-     -       Minor Sancho        -                         -
+     -       Minor Sancho        -        100              -
      -------------------------------------------------------
+
+Link del git: https://github.com/ferAlvarado/Proyecto2
