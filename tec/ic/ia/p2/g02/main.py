@@ -2,6 +2,7 @@
 ==========================================================================
 
 Proyecto #2 ­ Etimology relations
+                (Main)
 
 ==========================================================================
 :Institucion: Instituto Tecnologico de Costa Rica
@@ -11,66 +12,21 @@ Proyecto #2 ­ Etimology relations
 :Autores: Fernanda Alvarado Vargas,fernadaalvarado95@gmail.com /
           Minor Sancho Valverde,tivin.minor10@gmail.com /
           Freyser Jimenez Mena, fjimenez577@gmail.com /
-:Fecha: 23/05/2018
+:Fecha: 06/17/2018
 """
-
-
+# -----------------------------------------------------------------------
 from pyDatalog import pyDatalog
 import csv
 from time import time
-#import pandas as pd
 import numpy as np
 pyDatalog.create_atoms('idioma_aportando,contar_palabras,padre,\
                         hermano,tio,primo,hijo,palabra_idioma,idioma_palabra,\
                         contar_palabras_comunes,listar_palabras_comunes,\
                         ancestro,descendiente,idioma,palabra_comun,P,X,Y,A,B'
                        )
-lenguajes= ['ara', 'ave', 'akk', 'aaq', 'abe', 'abs','adt', 'afr', 'aii',
-    'ain', 'akz', 'ale','alq', 'amh', 'amj', 'ang', 'apw', 'arg',
-    'arn', 'arq', 'arw', 'ary', 'arz', 'ase','ast', 'auc', 'ava',
-    'axm', 'ayl', 'aym','aze', 'bak', 'bar', 'bdy', 'bel', 'ben',
-    'bft', 'bis', 'bod', 'bre', 'bua', 'bul','byn', 'cat', 'ccc',
-    'ceb', 'ces', 'cha','chc', 'che', 'chn', 'cho', 'chr', 'chu',
-    'cic', 'cmn', 'cop', 'cor', 'cre', 'crh','csb', 'cym', 'dan',
-    'del', 'dep', 'deu','div','dsb','dtd','dum','efi','egy','ell',
-    'emn','eng','enm','enn','epo','ess','est','eus','evn','ewe',
-    'fao','fas','fij','fin', 'fon','fra', 'frc', 'frk', 'frm',
-    'fro', 'frp', 'fry', 'fur', 'gae', 'gez', 'gil', 'gla', 'gle',
-    'glg', 'glv', 'gmh', 'gml', 'gmy', 'goh', 'got', 'grc', 'grn',
-    'grv', 'gsw', 'gug', 'guj', 'gul', 'gwi', 'hak', 'hat', 'hau',
-    'haw', 'hbs', 'heb', 'hif', 'hil', 'hin', 'hit', 'hop', 'hsb',
-    'hun', 'hur', 'hye', 'idb', 'ido', 'ike', 'ikt', 'iku', 'ina',
-    'ind', 'inz', 'ipk', 'isl', 'ita','jam', 'jav', 'jbo', 'jpn',
-    'kal', 'kan', 'kat', 'kaw', 'kaz', 'kbd', 'khm', 'kin', 'kir',
-    'kjh', 'kju', 'kky', 'kld', 'kmb', 'kok', 'kon', 'kor', 'kri',
-    'krl', 'ksd', 'ksh', 'kum', 'kur', 'kzj', 'lad', 'lao', 'lat',
-    'lav', 'lij', 'lim', 'lin', 'lit', 'liv', 'lkt', 'lld', 'lmo',
-    'lng', 'lou', 'ltc', 'ltz', 'lua', 'lug', 'luo', 'lut', 'lzh',
-    'mah', 'mak', 'mal', 'mar', 'mas', 'mav', 'mbc', 'mfr', 'mga',
-    'mic', 'min', 'mkd', 'mlg', 'mlt', 'mnc', 'mnk', 'mod', 'moe',
-    'moh', 'mon', 'mri', 'msa', 'mwl', 'mxi', 'mya', 'myv', 'nah',
-    'nan', 'nap', 'naq', 'nav', 'nay', 'nci', 'ndo', 'nds', 'nep',
-    'nld','nno', 'nob', 'non', 'nor', 'nov', 'nys', 'obr', 'obt',
-    'oci', 'oco', 'odt', 'ofs', 'oge', 'oji', 'okm', 'ood', 'orc',
-    'ori', 'orv', 'osp', 'oss', 'osx', 'ota', 'otk', 'owl', 'p_gem',
-    'p_gmw', 'p_ine', 'p_sla', 'pal', 'pan', 'pap', 'pau', 'pcd',
-    'pdt', 'peo', 'phn', 'pim', 'pis', 'pjt', 'pli', 'pml', 'pol',
-    'por', 'pox', 'ppl', 'prg', 'pro', 'pus', 'quc', 'que', 'qwc',
-    'rap', 'rhg', 'rme', 'rmf', 'rmq', 'roh', 'rom', 'ron', 'rop',
-    'rue', 'ruo', 'rup', 'rus', 'ryu', 'san', 'sat', 'scn', 'sco',
-    'see', 'sei', 'sga', 'shh', 'sin', 'slk', 'slv', 'sme', 'smo',
-    'sms', 'sna', 'som', 'sot', 'spa', 'sqi', 'srd', 'srn', 'srs',
-    'stg', 'sth', 'stq', 'sun', 'sux', 'swa', 'swe', 'syc', 'szl',
-    'tah', 'tam', 'tat', 'tcs', 'tcy', 'tel', 'tet', 'tew', 'tgk',
-    'tgl', 'tha', 'tir', 'tiv', 'tnq', 'ton', 'tpi', 'tpw', 'tsn',
-    'tuk', 'tur', 'twf', 'twi', 'txb', 'tzm', 'uga', 'uig', 'ukr',
-    'ulk', 'umb', 'umu', 'urd', 'uzb', 'vai', 'vec', 'vep', 'vie',
-    'vls', 'vma', 'vol', 'wam', 'wit', 'wlm', 'wln', 'wol', 'wrh',
-    'wym', 'xaa', 'xbm', 'xce', 'xcl', 'xho', 'xmb', 'xng', 'xno',
-    'xnt', 'xon', 'xpr', 'xtg', 'xto', 'yid', 'yol', 'yor', 'yua',
-    'yue', 'yur', 'yxg', 'zai', 'zko', 'zku', 'zsm', 'zul'
-    ]
 lenguajes1=['idioma_x','idioma_y','idioma_z']
+
+# -----------------------------------------------------------------------
 ################################### 1 ##################################
 """
 Funcion que nos permite obtener los datos de cada linea del archivo.
@@ -88,32 +44,57 @@ def buscar_dos_puntos_mayor_rendimiento(
         else:
             acum +=[palabra]
     return acum
+# -----------------------------------------------------------------------
+
+################################### 2 ##################################
 """
 Definicion de clausulas de logica.
 """
+# -----------------------------------------------------------------------
+#=================HERMANO=================
 hermano(X,Y) <= padre(X,P) & padre(Y,P)  & (X!=Y)
+
+#=================HIJO=================
 #hijo es X y padre es Y
 hijo(X,Y) <= padre(X,Y)
+
+#=================TIO=================
 #primero X = sobrino y segundo Y = tio
 tio(X,Y) <= padre(X,P) & hermano(Y,P)
+
+#=================PRIMO=================
 # X = primo 1 y Y = primo 2
 primo(X,Y) <= padre(X,A) & tio(Y,A)
+
+#=================Descendiente=================
 #A MAYOR Y B MENOR
 descendiente(B,A) <= padre(B,A)
 descendiente(B,A) <= padre(B,P) & descendiente(P,A)
+
+#=================Ancestro=================
 #A MAYOR Y Y MENOR
 ancestro(A,Y) <= descendiente(Y,A)
+
+#=================PalabraIdioma=================
 #X igual palabra y Y igual idioma
 palabra_idioma(X,Y) <= idioma(X,Y)
 palabra_idioma(X,Y) <= descendiente(X,P) & idioma(P,Y)
 palabra_idioma(X,Y) <= ancestro(X,P) & idioma(P,Y)
+
+#=================PalabraComun=================
 #X palabra y Y idioma
 palabra_comun(X,Y,A) <= idioma(A,Y) & padre(A,X)
+
+#=================idiomaPalabra=================
 #X palabra y Y resultado
 idioma_palabra(X,Y) <= idioma(X,Y)
 idioma_palabra(X,Y) <= descendiente(X,P) & idioma(P,Y)
 idioma_palabra(X,Y) <= ancestro(X,P) & idioma(P,Y)
+
+
+#=================ContaryListarPalabrasComunes=================
 #X palabra y Y resultado
+#listar
 listar_palabras_comunes(X,Y,P) <= idioma(P,X) & idioma(P,Y)
 #Contar
 contar_palabras_comunes(X,Y) <= idioma(P,X) & idioma(P,Y)
@@ -122,9 +103,8 @@ contar_palabras_comunes(X,Y) <= idioma(P,X) & idioma(P,Y)
 #X palabra y Y resultado
 idioma_aportando(A,X,P)<= idioma(P,A) & padre(P,Y) & idioma(Y,X)
 
-
-def obtener_Mayor_Porcentaje(
-        idioma,lenguajes):
+#Mayor procentaje
+def obtener_Mayor_Porcentaje(idioma,lenguajes):
     acum = []
     total= 0
     maximo = ["",0]
@@ -140,9 +120,8 @@ def obtener_Mayor_Porcentaje(
             maximo=maximo
     return str(maximo[0])+" "+str(((maximo[1]/total)*100))
 
-
-def obtener_Lista_Porcentajes(
-        idioma,lenguajes):
+#Todos los procentajes
+def obtener_Lista_Porcentajes(idioma,lenguajes):
     acum = []
     total= 0
     maximo = ["",0]
@@ -156,11 +135,14 @@ def obtener_Lista_Porcentajes(
         maximo+=[[j[0],j[1]]]
     acum+=[total]
     return acum
-
-
+# -----------------------------------------------------------------------
+lenguajes= ['ara', 'ave', 'akk', 'aaq', 'abe', 'abs', 'adt', 'afr', 'aii', 'ain', 'akz', 'ale', 'alq', 'amh', 'amj', 'ang', 'apw', 'arg', 'arn', 'arq', 'arw', 'ary', 'arz', 'ase', 'ast', 'auc', 'ava', 'axm', 'ayl', 'aym', 'aze', 'bak', 'bar', 'bdy', 'bel', 'ben', 'bft', 'bis', 'bod', 'bre', 'bua', 'bul', 'byn', 'cat', 'ccc', 'ceb', 'ces', 'cha', 'chc', 'che', 'chn', 'cho', 'chr', 'chu', 'cic', 'cmn', 'cop', 'cor', 'cre', 'crh', 'csb', 'cym', 'dan', 'del', 'dep', 'deu','div','dsb','dtd','dum','efi','egy','ell','emn','eng','enm','enn','epo','ess','est','eus','evn','ewe','fao','fas','fij','fin','fon','fra', 'frc', 'frk', 'frm', 'fro', 'frp', 'fry', 'fur', 'gae', 'gez', 'gil', 'gla', 'gle', 'glg', 'glv', 'gmh', 'gml', 'gmy', 'goh', 'got', 'grc', 'grn', 'grv', 'gsw', 'gug', 'guj', 'gul', 'gwi', 'hak', 'hat', 'hau', 'haw', 'hbs', 'heb', 'hif', 'hil', 'hin', 'hit', 'hop', 'hsb', 'hun', 'hur', 'hye', 'idb', 'ido', 'ike', 'ikt', 'iku', 'ina', 'ind', 'inz', 'ipk', 'isl', 'ita','jam', 'jav', 'jbo', 'jpn', 'kal', 'kan', 'kat', 'kaw', 'kaz', 'kbd', 'khm', 'kin', 'kir', 'kjh', 'kju', 'kky', 'kld', 'kmb', 'kok', 'kon', 'kor', 'kri', 'krl', 'ksd', 'ksh', 'kum', 'kur', 'kzj', 'lad', 'lao', 'lat', 'lav', 'lij', 'lim', 'lin', 'lit', 'liv', 'lkt', 'lld', 'lmo', 'lng', 'lou', 'ltc', 'ltz', 'lua', 'lug', 'luo', 'lut', 'lzh', 'mah', 'mak', 'mal', 'mar', 'mas', 'mav', 'mbc', 'mfr', 'mga', 'mic', 'min', 'mkd', 'mlg', 'mlt', 'mnc', 'mnk', 'mod', 'moe', 'moh', 'mon', 'mri', 'msa', 'mwl', 'mxi', 'mya', 'myv', 'nah', 'nan', 'nap', 'naq', 'nav', 'nay', 'nci', 'ndo', 'nds', 'nep', 'nld','nno', 'nob', 'non', 'nor', 'nov', 'nys', 'obr', 'obt', 'oci', 'oco', 'odt', 'ofs', 'oge', 'oji', 'okm', 'ood', 'orc', 'ori', 'orv', 'osp', 'oss', 'osx', 'ota', 'otk', 'owl', 'p_gem', 'p_gmw', 'p_ine', 'p_sla', 'pal', 'pan', 'pap', 'pau', 'pcd', 'pdt', 'peo', 'phn', 'pim', 'pis', 'pjt', 'pli', 'pml', 'pol', 'por', 'pox', 'ppl', 'prg', 'pro', 'pus', 'quc', 'que', 'qwc', 'rap', 'rhg', 'rme', 'rmf', 'rmq', 'roh', 'rom', 'ron', 'rop', 'rue', 'ruo', 'rup', 'rus', 'ryu', 'san', 'sat', 'scn', 'sco', 'see', 'sei', 'sga', 'shh', 'sin', 'slk', 'slv', 'sme', 'smo', 'sms', 'sna', 'som', 'sot', 'spa', 'sqi', 'srd', 'srn', 'srs', 'stg', 'sth', 'stq', 'sun', 'sux', 'swa', 'swe', 'syc', 'szl', 'tah', 'tam', 'tat', 'tcs', 'tcy', 'tel', 'tet', 'tew', 'tgk', 'tgl', 'tha', 'tir', 'tiv', 'tnq', 'ton', 'tpi', 'tpw', 'tsn', 'tuk', 'tur', 'twf', 'twi', 'txb', 'tzm', 'uga', 'uig', 'ukr', 'ulk', 'umb', 'umu', 'urd', 'uzb', 'vai', 'vec', 'vep', 'vie', 'vls', 'vma', 'vol', 'wam', 'wit', 'wlm', 'wln', 'wol', 'wrh', 'wym', 'xaa', 'xbm', 'xce', 'xcl', 'xho', 'xmb', 'xng', 'xno', 'xnt', 'xon', 'xpr', 'xtg', 'xto', 'yid', 'yol', 'yor', 'yua', 'yue', 'yur', 'yxg', 'zai', 'zko', 'zku', 'zsm', 'zul']
+################################### 3 ##################################
 """
 Funcion para cargar los datos del archivo.
 """
+# -----------------------------------------------------------------------
+
 def leer(
         nombre):
     lista = []
@@ -210,7 +192,7 @@ def leer(
             else:
                 print("Opcion no encontrada")
                 continue
-    print("TEMINE")
+    print("Datos leidos...")
     lista += [
         etymology_list, variant_orthography_list, derived_list,
         etymologically_related_list, is_derived_from_list,
@@ -220,6 +202,9 @@ def leer(
     return lista
 
 
+# -----------------------------------------------------------------------
+
+################################### 4 ##################################
 """
 Funcion para cargar los padres dependiendo la relacion en el archivo.
 """
@@ -255,9 +240,20 @@ def cargarPadres(
     return
 
 
+# -----------------------------------------------------------------------
+
+################################### 5 ##################################
 """
 Funcion para emparejar los idiomas dependiendo la relacion en el archivo.
 """
+# -----------------------------------------------------------------------
+def cargar_Idioma(datos,valor):
+    if valor==1:
+        + idioma(datos[1],datos[0])
+    else:
+        + idioma(datos[5],datos[4])
+    return
+
 def cargar_Idiomas1(
         opciones, datos, valor):
     for palabra in opciones:
@@ -311,9 +307,67 @@ def cargar_Idiomas1(
                     + idioma(i[5],i[4])
     print("Idiomas Cargados...")
     return
+
+def cargar_Idiomas2(
+        opciones, datos, valor):
+    for palabra in opciones:
+        if palabra =="etymological_origin_of":
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra =="has_derived_form" :
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra =="etymologically":
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra == "etymology":
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra == "variant:orthography":
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra == "derived":
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra == "etymologically_related":
+            for i in datos[3]:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+        if palabra == "is_derived_from":
+            for i in datos:
+                if valor==1:
+                    + idioma(i[1],i[0])
+                else:
+                    + idioma(i[5],i[4])
+    print("Idiomas Cargados...")
+    return
+# -----------------------------------------------------------------------
+
+################################### 6 ##################################
 """
 Funcion para conocer datos finales, de opcion conocida.
 """
+# -----------------------------------------------------------------------
 def conocer_resultados(
         palabra1,palabra2,opcion):
     if opcion==1:
@@ -399,3 +453,18 @@ def conocer_resultados(
             print(str(k[0])+" "+str(((k[1]/acum[-1])*100)))
     else:
         print("No se encontro la opcion")
+
+
+
+def cortar():
+    for i in range(1,7):
+        lista = leer("l"+str(i)+".tsv")
+        lista = leer("etymwn.tsv")
+        cargar_Idiomas1(["has_derived_form"], lista, 1)
+        cargar_Idiomas1(["has_derived_form"], lista, 2)
+##tiempo_inicial = time()       
+##cortar2()
+##tiempo_final = time()
+##print("Tiempo de ejecucion: ",(tiempo_final-tiempo_inicial)/60)
+    
+

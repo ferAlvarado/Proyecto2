@@ -1,9 +1,31 @@
+"""
+==========================================================================
+
+Proyecto #2 ­ Etimology relations
+                (Interfaz)
+
+==========================================================================
+:Institucion: Instituto Tecnologico de Costa Rica
+:Curso: Inteligencia Artificial
+:Grupo: 2
+:Semestre: I Semestre 2018
+:Autores: Fernanda Alvarado Vargas,fernadaalvarado95@gmail.com /
+          Minor Sancho Valverde,tivin.minor10@gmail.com /
+          Freyser Jimenez Mena, fjimenez577@gmail.com /
+:Fecha: 06/17/2018
+"""
+# -----------------------------------------------------------------------
 from tkinter import *
 from tkinter import ttk
 from tkinter import Image
-from main3 import *
-
-
+from main import *
+x = leer("etymwn.tsv")
+# -----------------------------------------------------------------------
+################################### 1 ##################################
+"""
+Funcion que define la ventana principal.
+"""
+# -----------------------------------------------------------------------
 def v_principal():
     desaparecer_elementos()
     lbl_bienvenido.pack()
@@ -19,9 +41,15 @@ def v_principal():
     chbox_etymologically_related.place(x=200,y=270)
     chbox_derived.place(x=200,y=300)
     chbox_etymologically.place(x=200,y=330)
-
+# -----------------------------------------------------------------------
+################################### 2 ##################################
+"""
+Funcion que nos permite conocer cual opcion es elegida.
+"""
+# -----------------------------------------------------------------------
     
 def opciones():
+    global x
     opcion=[]
     if (var.get()):
         opcion += ["etymological_origin_of"]
@@ -37,7 +65,6 @@ def opciones():
         opcion += ["derived"]
     if (var6.get()):
         opcion += ["etymologically"]
-    x = leer("j.tsv")
     cargarPadres(opcion, x)
     if (cmbox_opcion_value.get()=="Dos palabras"):
         dos_palabras_interfaz()
@@ -50,7 +77,12 @@ def opciones():
         cargar_Idiomas1(opcion, x,2)
         idioma_interfaz()
 
-        
+# -----------------------------------------------------------------------
+################################### 3 ##################################
+"""
+Definiciones de cada operacion para ser ejecutada en la interfaz.
+"""
+# -----------------------------------------------------------------------        
 def dos_palabras_interfaz():
     desaparecer_elementos()
     lbl_bienvenido["text"]="Dos palabras"
@@ -354,7 +386,12 @@ def func_idiomas():
                          "Consulta:","Idiomas Cargados","Padres Cargados.."]
                         )
 
-        
+# -----------------------------------------------------------------------
+################################### 4 ##################################
+"""
+Funcion para definir los detalles de las funciones.
+"""
+# ----------------------------------------------------------------------- 
 def ventana_detalles(
         lista):
     detalles = Toplevel()
@@ -579,5 +616,6 @@ btn_idioma=Button(ventana_principal,text="Procesar",
                   font=("Bitstream Vera Serif", 10),
                   command=func_idiomas)
 #componentes_interfaz()
+
 v_principal()
 ventana_principal.mainloop()
