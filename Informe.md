@@ -25,7 +25,9 @@ Manual de usuario:https://github.com/ferAlvarado/Proyecto2/blob/master/Manual%20
 # Sección 4. Resultados.
 Según los datos de registrados en la base y las pruebas realizadas para los diferentes idiomas con etymological origin of se puede deducir el resultado más relevante es el aporte que tiene el español y el latín; tomando en cuenta que el 60% con una relación etimological origin of tiene un aporte del mismo idioma. Además, se observá que el latín y el español tienen una relación muy fuerte ya que el porcentaje de aporte es muy similar.
 A continuación, se muestran gráficas de los aportes del latín y el español a otros idiomas:
+
 [![Imagen1](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/Latin.png?raw=true)
+
 
 [![Imagen2](https://github.com/ferAlvarado/Proyecto2/blob/master/Imagenes_informe/spa.png?raw=true)
 
