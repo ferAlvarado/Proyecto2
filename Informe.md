@@ -15,7 +15,7 @@ La derivación lógica es un algoritmo utilizado en Inteligencia Artificial para
 Los datos que se van a procesar son relaciones etimológicas entre palabras de diferentes idiomas; estos datos se extraen de la base de la base de datos "Etymological Wordnet", la cual se basa en  basada en en.wiktionary.org que recopila relaciones entre palabras en múltiples idiomas (aunque iniciando desde inglés). Tomando estos datos, se puede construir un sistema que, basado en proposiciones lógicas, nos permita responder preguntas relacionadas con orígen común de palabras, similitud entre lenguajes, etc. El proyecto se va a desarrollar con la biblioteca pyDatalog, la cual es una adaptación de un lenguaje lógico en alto nivel y actualmente es muy utilizado en esta rama para realizar multiples proyecto, esto se debe a que es fácil de aprender y se adapta a las necesidades de los desarrolladores.
 # Sección 2. Descripción de instalación.
 Para instalar este proyecto:
-1. Descargas la base de datos .tsv: http://www1.icsi.berkeley.edu/~demelo/etymwn
+1. Descargas la base de datos .tsv: http://www1.icsi.berkeley.edu/~demelo/etymwn; es importante que la base de datos tenga el nombre "etymwn.tsv"
 2. Descargar el proyecto https://github.com/ferAlvarado/Proyecto2.
 3. Una vez descargado el proyecto se debe descomprimir en el directorio que desee.
 4. Para que el proyecto funcione correctamente, la base de datos ddescargada se debe copiar en la carpeta donde se ejecuta el proyecto; en este caso: /tec/ia/p2/g02.
