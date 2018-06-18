@@ -206,3 +206,5 @@ def cargar_Idiomas1(opciones, datos, valor):
      -------------------------------------------------------
      -       Minor Sancho        -        100              -
      -------------------------------------------------------
+
+Link del git: https://github.com/ferAlvarado/Proyecto2
